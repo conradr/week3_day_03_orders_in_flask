@@ -10,7 +10,7 @@ def app_index():
 
 @app.route('/orders/')
 def task_index():
-    return render_template('index.html', title="Todo list", orders=orders)
+    return render_template('index.html', title="Order list", orders=orders)
 
 # /tasks url
 # list of tasks
@@ -18,10 +18,9 @@ def task_index():
 # links route to /task/1
 
 
-@app.route('/orders/<int:index>/', methods=['GET'])
-def order_detail(index):
-    order = orders[index]
-    return render_template('order.html', title="Task", order=order)
-
-
-#app.add_url_rule('/tasks/<int:id>', 'task_index', task_index)
+@app.route('/orders/<order_id>/', methods=['GET'])
+def order_detail(order_id):
+    for order in orders:
+        if order_id == order.order_id:
+            chosen_order = order
+    return render_template('order.html', title="Order Details", order=chosen_order)
